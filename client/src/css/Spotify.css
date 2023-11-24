@@ -1,0 +1,16 @@
+.login {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+}
+
+.login > a {
+  padding: 20px;
+  border-radius: 99px;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  background-color: #eebccd;
+}
