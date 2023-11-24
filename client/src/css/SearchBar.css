@@ -26,3 +26,27 @@ button {
   background-color: #eebccd;
   color: black;
 }
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 6px;
+  display: block;
+  margin: 0 auto;
+  color: #eebccd;
+  align-self: center;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  display: block;
+  margin: 0 auto;
+  color: #eebccd;
+  align-self: center;
+  justify-content: center;
+}
+
+p {
+  color: #eebccd;
+}
