@@ -1,5 +1,6 @@
 // BookSearch.js
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../css/BookSearch.css';
 
 function BookSearcher({ bookTitle }) {
@@ -16,15 +17,30 @@ function BookSearcher({ bookTitle }) {
         const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(bookTitle)}`;
         
         // Fetching data from the API
-        fetch(url)
-          .then(response => response.json()) // Parsing the JSON response
-          .then(data => {
-            console.log(data.docs);
-            // Updating the books state with the fetched data
-            setBooks(data.docs); // Assuming 'docs' contains the array of books
-          })
-          .catch(error => console.error('Error fetching books', error)); // Handling any fetch errors
-      };
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const uniqueAuthors = new Set();
+          const filteredBooks = data.docs.filter(book => {
+            if (book.author_name) {
+              const authors = book.author_name.filter(author => {
+                if (!uniqueAuthors.has(author)) {
+                  uniqueAuthors.add(author);
+                  return true;
+                }
+                return false;
+              });
+              if (authors.length > 0) {
+                book.author_name = authors;
+                return true;
+              }
+            }
+            return false;
+          });
+          setBooks(filteredBooks);
+        })
+        .catch(error => console.error('Error fetching books', error));
+    };
 
       // Calling the fetchBooks function
       fetchBooks();
@@ -35,14 +51,21 @@ function BookSearcher({ bookTitle }) {
 return (
   <div>
     {books.map((book, index) => (
-      <div key={index}> {/* Use a div to wrap both title and authors, and use index here */}
-        <p class="title">{book.title}</p>
-        {/* Check if author_name exists and is an array, then map over it to display each author's name */}
-        {Array.isArray(book.author_name) && book.author_name.map((authorName, authorIndex) => (
-          <p class="author" key={authorIndex}>{authorName}</p>
-        ))}
-      </div>
-    ))}
+    <div key={index}>
+      {Array.isArray(book.author_name) && book.author_name.map((authorName, authorIndex) => (
+        <p className="title">{book.title} 
+          <li className="author">
+            <Link to={{ 
+              pathname: '/search-spotify', 
+              state: { bookTitle: book.title } 
+            }}>
+              by {authorName}
+            </Link>
+          </li>
+        </p>
+      ))}
+    </div>
+  ))}
   </div>
 );
 

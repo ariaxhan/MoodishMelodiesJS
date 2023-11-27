@@ -1,8 +1,6 @@
-import BookSearcher from './BookSearch';
-import { useState } from 'react';
 
 
-function analyzeWordFrequency(books) {
+function analyzeWordFrequency(bookTitle, authorName) {
 	// collect all the words from the subjects of the book
 
 }

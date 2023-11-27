@@ -1,9 +1,13 @@
 .title {
   color: black;
   size: 14px;
+  align-items: center;
+  text-align: center;
 }
 
 .author {
   color: pink;
   size: 12px;
+  align-items: center;
+  text-align: center;
 }

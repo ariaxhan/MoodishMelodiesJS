@@ -20,6 +20,7 @@ function App() {
           <Route path="/search" element={<SearchBar />} />
           <Route path="/top_playlists" element={<TopPlaylists />} />
           <Route path='*' element={<NotFoundPage />} />
+          <Route path='/author' element={<NotFoundPage />} />
         </Routes>
       </Router>
     </SharedDataProvider>
