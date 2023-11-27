@@ -56,7 +56,7 @@ return (
         <p className="title">{book.title} 
           <li className="author">
             <Link to={{ 
-              pathname: '/search-spotify', 
+              pathname: '/SearchSpotify', 
               state: { bookTitle: book.title } 
             }}>
               by {authorName}
