@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SpotifyWebApi from "spotify-web-api-js";
 
 // Spotify Authentication Constants and Functions
@@ -14,7 +14,6 @@ const scopes = [
   "user-modify-playback-state",
 ];
 
-// Function to extract token from URL
 export const getTokenFromUrl = () => {
   return window.location.hash
     .substring(1)
@@ -26,7 +25,6 @@ export const getTokenFromUrl = () => {
     }, {});
 };
 
-// Spotify login URL with required scopes
 export const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
   "%20"
 )}&response_type=token&show_dialog=true`;
@@ -38,34 +36,19 @@ function Authenticate() {
     const [token, setToken] = useState();
 
     useEffect(() => {
-        // Extract the token from the URL
         const hash = getTokenFromUrl();
-        window.location.hash = ""; // Clear the hash from the URL
+        window.location.hash = "";
         const _token = hash.access_token;
 
         if (_token) {
-            setToken(_token); // Set the token in the state
-            spotify.setAccessToken(_token); // Set the token for Spotify API
-
-            // Send the token to the Express server
-            fetch('http://localhost:3003/set-spotify-token', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ spotifyToken: _token }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Token sent to the server:", data.message);
-            })
-            .catch(error => {
-                console.error("Error sending token to server:", error);
-            });
+            setToken(_token);
+            spotify.setAccessToken(_token);
+            console.log("Token set:", _token); // Logging the actual token received
         }
     }, []);
 
-    return null; 
+    // Return something or null if nothing is to be rendered
+    return null; // or your JSX here
 }
 
 export default Authenticate;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SpotifyWebApi from "spotify-web-api-js";
 
 // Spotify Authentication Constants and Functions
