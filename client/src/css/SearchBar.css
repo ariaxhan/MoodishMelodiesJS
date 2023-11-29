@@ -1,0 +1,52 @@
+/* SearchBar.css */
+form {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  margin-right: 10px;
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #eebccd;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.navbar {
+  background-color: #eebccd;
+  color: black;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 6px;
+  display: block;
+  margin: 0 auto;
+  color: #eebccd;
+  align-self: center;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  display: block;
+  margin: 0 auto;
+  color: #eebccd;
+  align-self: center;
+  justify-content: center;
+}
+
+p {
+  color: #eebccd;
+}
