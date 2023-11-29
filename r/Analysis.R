@@ -1,3 +1,6 @@
+rm(list=ls())
+cat("\014")
+
 # Import required libraries
 library(httr)
 library(jsonlite)
@@ -9,6 +12,7 @@ library(tidyr)
 readData <- function(filePath) {
   dataJson <- fromJSON(filePath)
   list(bookData = dataJson$bookData, spotifyToken = dataJson$spotifyToken)
+  print(dataJson)
 }
 
 # Main execution starts here

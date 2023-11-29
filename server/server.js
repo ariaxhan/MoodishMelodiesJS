@@ -14,7 +14,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Enable CORS for development
 app.use(cors());
@@ -59,6 +59,7 @@ app.post('/analyze-book', async (req, res) => {
     }
 });
 
-app.listen(3003, () => {
-    console.log('Listening on 3003');
+app.listen(3000, () => {
+    console.log('Listening on 3000');
 });
+
