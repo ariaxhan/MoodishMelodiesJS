@@ -1,21 +1,6 @@
----
-title: "BookAnalysisTest"
-author: "Aria Han"
-date: "2023-11-29"
-output: html_document
----
+rm(list=ls())
+cat("\014")
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r lib}
 # Import required libraries
 library(httr)
 library(jsonlite)
@@ -24,11 +9,30 @@ library(stringr)
 library(tidyr)
 library(jsonlite)
 
-```
+dataJson <- fromJSON(~/testdata.json)
+print(dataJson)
 
-You can also embed plots, for example:
+# Function to read data from the file provided by the Express server
+# readData <- function(filePath) {
+  # dataJson <- fromJSON(filePath)
+ #  list(bookData = dataJson$bookData, spotifyToken = dataJson$spotifyToken)
+  # print(dataJson)
+# }
 
-```{r, echo=FALSE}
+# Main execution starts here
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) == 0) {
+  stop("No file path provided")
+}
+
+filePath <- args[1]
+data <- readData(filePath)
+
+# Extracted data
+bookData <- data$bookData
+spotifyToken <- data$spotifyToken
+
+# data processing and Spotify API interaction code 
 #load json file
 json_data <- fromJSON("~/Documents/BookishMelodiesJS/r/testdata.json")
 # extract docs column
@@ -51,17 +55,7 @@ df_clean <- df_sorted[!grepl("fiction|nonfiction|children|bestseller|reading|spa
 df_first5 <- df_clean[1:5, ]
 print(df_first5)
 
-```
+# Example: Print the received data (You should replace this with your actual processing and API calls)
 
 
-```{r, echo=FALSE}
-
-
-
-```
-
-
-
-
-
-
+# Don't forget to handle error scenarios and ensure your R script is robust against various types of input.
