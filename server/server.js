@@ -59,7 +59,7 @@ app.post('/analyze-book', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log('Listening on 3000');
+app.listen(3001, () => {
+    console.log('Listening on 3001');
 });
 

@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/BookSearch.css';
+import SendBookData from './SendBookData';
 
 function BookSearcher({ bookTitle }) {
   // useState hook to maintain the state of the books array
@@ -48,31 +49,26 @@ function BookSearcher({ bookTitle }) {
   }, [bookTitle]); // The effect will re-run when the bookTitle prop changes
 
   // Rendering the fetched book data
- return (
-    <div className="book-search-results">
-      {books.map((book, index) => (
-        <div key={index} className="book-entry">
-          <p className="title">{book.title}</p>
-          {book.author_name && book.author_name.map((authorName, authorIndex) => (
-            <Link
-              key={authorIndex}
-              to={{
-                pathname: '/book-details',
-                state: {
-                  bookTitle: book.title,
-                  authorName: authorName,
-                  // Include other book details you want to pass
-                }
-              }}
-              className="author-link"
-            >
-              by {authorName}
-            </Link>
-          ))}
+    // Rendering the fetched book data
+    return (
+        <div className="book-search-results">
+            {books.map((book, index) => (
+                <div key={index} className="book-entry">
+                    <p className="title">{book.title}</p>
+                    {book.author_name && book.author_name.map((authorName, authorIndex) => (
+                        <div key={authorIndex} className="author-link">
+                            <span>by {authorName}</span>
+                            <button onClick={() => SendBookData({
+                               book;
+                            })}>
+                                Analyze Book
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            ))}
         </div>
-      ))}
-    </div>
-  );
+    );
 }
 
 export default BookSearcher;

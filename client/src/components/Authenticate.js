@@ -48,7 +48,7 @@ function Authenticate() {
             spotify.setAccessToken(_token); // Set the token for Spotify API
 
             // Send the token to the Express server
-            fetch('http://localhost:3003/set-spotify-token', {
+            fetch('http://localhost:3001/set-spotify-token', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

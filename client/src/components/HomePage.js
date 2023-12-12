@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../css/SearchBar.css';
 import SearchBar from './SearchBar';
+import Login from './Login';
 
 function HomePage() {
   return (
@@ -22,6 +23,8 @@ function HomePage() {
       </div>
 
       <SearchBar />
+
+        <Login />
       
       <footer>
         <p>&copy; 2023 BookishMelodies</p>
