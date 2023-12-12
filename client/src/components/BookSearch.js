@@ -59,7 +59,8 @@ function BookSearcher({ bookTitle }) {
                         <div key={authorIndex} className="author-link">
                             <span>by {authorName}</span>
                             <button onClick={() => SendBookData({
-                               book;
+                               // send book data to the server
+                              book,
                             })}>
                                 Analyze Book
                             </button>

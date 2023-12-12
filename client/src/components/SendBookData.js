@@ -6,15 +6,17 @@ function SendBookData(bookData) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ bookData }),
+        // convert bookData to json
+        body: JSON.stringify(bookData),
     })
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
         })
         .catch((error) => {
-            console.log('bookData:', bookData)
-            console.error(JSON.stringify({ bookData }));
+            console.error(JSON.stringify(bookData));
+            // print type of bookData
+            console.log(typeof bookData);
             console.error('Error:', error);
         });
 }

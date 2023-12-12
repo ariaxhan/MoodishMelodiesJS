@@ -12,12 +12,18 @@ const app = express();
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
+app.use(express.json());
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Enable CORS for development
 app.use(cors());
+// allow access for openlibrary
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
 
 let globalSpotifyToken = null; // Variable to store Spotify token
 
