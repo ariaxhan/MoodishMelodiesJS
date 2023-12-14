@@ -1,71 +1,46 @@
-require('dotenv').config({ path: './spotifytoken.env' });
+// Server-side Express app
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
-const axios = require('axios');
-const bodyParser = require('body-parser');
-const { exec } = require('child_process');
-const fs = require('fs').promises;
-const os = require('os');
+const {join} = require("path");
 
 const app = express();
 
 // Middleware to parse JSON bodies
-app.use(bodyParser.json());
 app.use(express.json());
-
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Enable CORS for development
 app.use(cors());
-// allow access for openlibrary
+// allow access
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
 });
 
-let globalSpotifyToken = null; // Variable to store Spotify token
+// Serve static files from the React app
+app.use(express.static(join(__dirname, '../client/build')));
 
 // Endpoint to set Spotify token
 app.post('/set-spotify-token', (req, res) => {
-    globalSpotifyToken = req.body.spotifyToken;
+    let globalSpotifyToken = req.body.spotifyToken;
     res.send({ message: 'Spotify token received and stored.' });
 });
 
-// Endpoint for analyzing a book
-app.post('/analyze-book', async (req, res) => {
-    const { bookData } = req.body;
-    const spotifyToken = globalSpotifyToken; // Use the stored Spotify token
-
-    // Create a temporary file to store the data
-    const tempDir = os.tmpdir();
-    const tempFilePath = path.join(tempDir, 'tempData.json');
-
-    try {
-        // Write the combined data to the temporary file
-        await fs.writeFile(tempFilePath, JSON.stringify({ bookData, spotifyToken }));
-
-        // Execute the R script with the path to the temporary file
-        exec(`Rscript r/Analysis.R ${tempFilePath}`, async (err, stdout, stderr) => {
-            // Clean up: delete the temporary file
-            await fs.unlink(tempFilePath);
-
-            if (err) {
-                console.error('Error executing R script:', err);
-                res.status(500).send('Error executing R script');
-                return;
-            }
-
-            res.json({ analysisResult: stdout }); // Send the result of R script execution back to React
-        });
-    } catch (error) {
-        console.error('Error processing data:', error);
-        res.status(500).send('Error processing data');
+// Endpoint for analyzing a mood
+app.post('/analyze-mood', async (req, res) => {
+    const { mood } = req.body;
+    console.log('Received mood:', mood);
+    if (!mood) {
+        res.status(400).send('No mood data provided');
+        return;
     }
+
+    // Here, you can add any logic to process the mood data
+
+    // Example response
+    res.json({ message: `Mood ${mood} received and processed.` });
 });
 
-app.listen(3001, () => {
-    console.log('Listening on 3001');
+const PORT = 3001; // Directly setting the port number
+app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
 });
-

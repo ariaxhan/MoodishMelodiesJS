@@ -12,7 +12,7 @@ import NotFoundPage from './components/NotFoundPage'; // Placeholder component f
 
 function App() {
   return (
-    <SharedDataProvider> {/* Wrap the entire application with SharedDataProvider */}
+    <SharedDataProvider>
       <Router>
         <Routes>
           <Route path='/' element={<HomePage />} />

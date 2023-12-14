@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import '../css/SearchBar.css';
 import SearchBar from './SearchBar';
 import Login from './Login';
+import Processing from './Processing';
 
 function HomePage() {
   return (
@@ -13,16 +14,14 @@ function HomePage() {
         </ul>
       </nav>
 
-      <header>
-        <p id="title">Bookish Melodies</p>
-      </header>
+        <header>
+            <h3 id="title">Moodish Melodies</h3>
+            <p>Mood-Inspired Playlist Generator</p>
+        </header>
 
-      <div> 
-        <h1>Bookish Melodies</h1> 
-        <h2>Book-Inspired Playlist Generator</h2>
-      </div>
+        <Processing/>
 
-      <SearchBar />
+        <SearchBar />
 
         <Login />
       

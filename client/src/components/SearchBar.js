@@ -1,31 +1,44 @@
-// SearchBar.js
 import React, { useContext, useState } from 'react';
 import SharedDataContext from './SharedDataContext';
-import BookSearcher from './BookSearch';
-
 function SearchBar() {
-  const { searchTerm, setSearchTerm } = useContext(SharedDataContext);
-  const [searchInput, setSearchInput] = useState(searchTerm);
+    const { setSearchTerm } = useContext(SharedDataContext);
+    const [isLoading, setIsLoading] = useState(false); // State to track the loading status
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setSearchTerm(searchInput); // Update the shared search term
-  };
+    const moods = ['Happy', 'Sad', 'Energetic', 'Relaxed', 'Angry', 'Romantic'];
 
-  return (
-    <>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          placeholder="Search for a book"
-        />
-        <button type="submit">Search</button>
-      </form>
-      <BookSearcher bookTitle={searchTerm} />
-    </>
-  );
+    const sendMoodToServer = async (mood) => {
+        setIsLoading(true); // Start loading
+        try {
+            const response = await fetch('http://localhost:3001/analyze-mood', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ mood: mood }),
+            });
+            const data = await response.json();
+            console.log('Server response:', data);
+            setSearchTerm(mood); // Update the shared search term with the selected mood
+        } catch (error) {
+            console.error('Error sending mood to server:', error);
+        } finally {
+            setIsLoading(false); // End loading
+        }
+    };
+
+    const handleMoodClick = (mood) => {
+        sendMoodToServer(mood); // Send the selected mood to the server
+    };
+
+    return (
+        <div>
+            {moods.map((mood, index) => ( // Hide mood buttons when loading
+                <button key={index} onClick={() => handleMoodClick(mood)}>
+                    {mood}
+                </button>
+            ))}
+        </div>
+    );
 }
 
 export default SearchBar;

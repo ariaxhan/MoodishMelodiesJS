@@ -4,12 +4,11 @@ body, h1, h2, p {
 }
 
 header {
-    background-color: #eebccd;
-    color: #fff;
+    background-color: #FFD9DA;
+    color: #00120B;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
 }
 
 .logo img {
@@ -60,25 +59,9 @@ h1 {
   font-size: 30px;
 }
 
-#gen {
-  width: 150px;
-  height: 50px;
-  display: block;
-  margin: 0 auto;
-  background-color: #eebccd; 
-  color: #fafafa;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px; 
-  cursor: pointer; 
-}
-
-#gen:hover {
-  background-color: #ea87a8; 
-}
 
 footer {
-    background-color: #6a6a6a;
+    background-color: #04724D;
     color: #fff;
     text-align: center;
     padding: 1rem;

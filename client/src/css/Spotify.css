@@ -3,7 +3,6 @@
   place-items: center;
   justify-content: center;
   align-items: center;
-  background-color: rgb(255, 255, 255);
 }
 
 .login > a {
@@ -12,5 +11,5 @@
   font-weight: 600;
   color: white;
   text-decoration: none;
-  background-color: #eebccd;
+  background-color: #FFD9DA;
 }
