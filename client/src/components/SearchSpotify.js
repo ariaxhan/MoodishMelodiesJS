@@ -7,23 +7,34 @@ const spotify = new SpotifyWebApi();
 
 function SearchSpotify() {
   const location = useLocation();
-  const [searchResults, setSearchResults] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
 
   useEffect(() => {
-    // Extracting the book title passed in the state from BookSearch.js
-    const bookTitle = location.state?.bookTitle;
+    const mood = location.state?.mood;
 
-    if (bookTitle) {
-      // Function to search Spotify based on the book title
-      const searchSpotify = async (title) => {
+    if (mood) {
+      // Function to get recommendations from Spotify based on the mood
+      const getSpotifyRecommendations = async (mood) => {
         try {
-          // Assuming you want to search for playlists related to the book title
-          const response = await spotify.searchPlaylists(title);
-          if (response.playlists && response.playlists.items) {
-            setSearchResults(response.playlists.items);
+          // Define attributes or seeds based on the mood
+          const moodAttributes = {
+            Happy: { valence: 0.8, energy: 0.8 },
+            Sad: { valence: 0.2, energy: 0.3 },
+            // Add other moods here
+          };
+
+          // Fetch recommendations
+          const response = await spotify.getRecommendations({
+            seed_genres: ['pop'], // Example: using 'pop' genre as seed
+            target_valence: moodAttributes[mood]?.valence,
+            target_energy: moodAttributes[mood]?.energy,
+          });
+
+          if (response.tracks) {
+            setRecommendations(response.tracks);
           }
         } catch (error) {
-          console.error('Error searching Spotify:', error);
+          console.error('Error fetching recommendations:', error);
         }
       };
 
@@ -31,20 +42,20 @@ function SearchSpotify() {
       const tokenInfo = getTokenFromUrl();
       if (tokenInfo.access_token) {
         spotify.setAccessToken(tokenInfo.access_token);
-        searchSpotify(bookTitle);
+        getSpotifyRecommendations(mood);
       }
     }
   }, [location.state]);
 
   return (
-    <div>
-      <h2>Spotify Search Results for "{location.state?.bookTitle}"</h2>
-      <ul>
-        {searchResults.map((playlist, index) => (
-          <li key={index}>{playlist.name}</li>
-        ))}
-      </ul>
-    </div>
+      <div>
+        <h2>Spotify Recommendations for Mood: "{mood}"</h2>
+        <ul>
+          {recommendations.map((track, index) => (
+              <li key={index}>{track.name} by {track.artists.map(artist => artist.name).join(', ')}</li>
+          ))}
+        </ul>
+      </div>
   );
 }
 
