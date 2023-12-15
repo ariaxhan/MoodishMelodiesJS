@@ -1,15 +1,4 @@
-body, h1, h2, p {
-    margin: 0;
-    padding: 0;
-}
 
-header {
-    background-color: #FFD9DA;
-    color: #00120B;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 .logo img {
     max-width: 100px;
@@ -22,16 +11,20 @@ nav ul {
 
 nav li {
     margin-right: 20px;
+    color: white;
+    font-family: monospace;
 }
 
 nav a {
     text-decoration: none;
-    color: #fff;
+    color: white;
     font-weight: bold;
+    font-family: monospace;
 }
 
 main {
     padding: 2rem;
+
 }
 
 section {
@@ -41,31 +34,48 @@ section {
 h1 {
     font-size: 24px;
     margin-bottom: 10px;
-    display: block; 
-    margin: 0 auto;
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-family: monospace;
+    align-self: center;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-family: monospace;
+    align-self: center;
+    align-items: center;
+    align-content: center;
 }
 
 .title {
     text-align: center;
+    color: black;
     margin-bottom: 2rem;
-}
+    font-size: 40px;
+    font-family: monospace;
 
-#title {
-  text-align:center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 30px;
 }
-
 
 footer {
-    background-color: #04724D;
+    background-color: black;
     color: #fff;
     text-align: center;
     padding: 1rem;
     position: fixed;
     bottom: 0;
+    width: 100%;
+}
+
+.navbar {
+    background-color: #00120b;
+    color: #fff;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
     width: 100%;
 }

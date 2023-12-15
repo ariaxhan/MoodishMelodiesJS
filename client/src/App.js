@@ -8,7 +8,8 @@ import HomePage from './components/HomePage';
 import Login from './components/Login';
 import SearchBar from './components/SearchBar';
 import TopPlaylists from './components/TopPlaylists';
-import NotFoundPage from './components/NotFoundPage'; // Placeholder component for 404 Not Found
+import NotFoundPage from './components/NotFoundPage';
+import LoginPage from './components/LoginPage';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/search" element={<SearchBar />} />
           <Route path="/top_playlists" element={<TopPlaylists />} />
           <Route path='*' element={<NotFoundPage />} />
-          <Route path='/author' element={<NotFoundPage />} />
+          <Route path='/login-page' element={<LoginPage />} />
         </Routes>
       </Router>
     </SharedDataProvider>

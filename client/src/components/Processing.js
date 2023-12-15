@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../css/Processing.css';
 
 function Processing() {
     const [position, setPosition] = useState(-100);
@@ -16,9 +15,8 @@ function Processing() {
 
         return () => cancelAnimationFrame(animationFrameId);
     }, []);
-
     const loadingBarStyle = {
-        width: '100%',
+        width: '60%',
         height: '20px',
         backgroundColor: '#ddd',
         marginBottom: '10px',
@@ -31,16 +29,22 @@ function Processing() {
         left: `${position}%`,
         width: '100%',
         height: '100%',
-        background: 'linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet)',
+        background: 'linear-gradient(to right, blue, indigo, violet)',
     };
 
-
     return (
-        <div className="processing-container" style={{ textAlign: 'center', padding: '20px' }}>
+        <div className="processing-container" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            padding: '20px',
+            width: '100%',
+        }}>
             <div style={loadingBarStyle}>
                 <div style={loadingBarInnerStyle}></div>
             </div>
-            <p>How are you feeling today?</p>
         </div>
     );
 }
