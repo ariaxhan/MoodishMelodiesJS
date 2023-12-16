@@ -1,7 +1,10 @@
 
 import React from 'react';
-import Authenticate from './Authenticate';
+import Login from './Login';
 function LoginPage() {
+    const redirectLogin = () => {
+        window.location.href = 'http://localhost:3001/analyze-mood';
+    };
   return (
     <div>
         <header>
@@ -10,11 +13,12 @@ function LoginPage() {
         <br />
         <br />
 
-        <Authenticate/>
-      
-	  <br/>	
+        <Login onLogin={redirectLogin} />
+
+        <br />
     </div>
   );
 }
+
 
 export default LoginPage;

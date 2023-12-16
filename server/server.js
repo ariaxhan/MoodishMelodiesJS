@@ -1,3 +1,5 @@
+
+
 // Server-side Express app
 const express = require('express');
 const cors = require('cors');
@@ -15,6 +17,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     next();
 });
+
 
 // Serve static files from the React app
 app.use(express.static(join(__dirname, '../client/build')));
@@ -39,6 +42,13 @@ app.post('/analyze-mood', async (req, res) => {
     // Example response
     res.json({ message: `Mood ${mood} received and processed.` });
 });
+
+
+// Serve React app for any other route
+app.get('*', (req, res) => {
+    res.sendFile(join(__dirname, '../client/build', 'index.html'));
+});
+
 
 const PORT = 3001; // Directly setting the port number
 app.listen(PORT, () => {

@@ -1,9 +1,9 @@
 // Login.js
 import { loginUrl } from "./Authenticate";
 
-function Login() {
+function Login({ onLogin }) {
   return (
-    <div className="login">
+      <div className="login" onClick={onLogin} style={{ cursor: 'pointer' }}>
       <br /> 
       <a href={loginUrl}>LOGIN WITH SPOTIFY</a>
       <br />
@@ -11,5 +11,4 @@ function Login() {
     </div>
   );
 }
-
 export default Login;
