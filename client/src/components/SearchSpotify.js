@@ -1,14 +1,17 @@
 import {useContext, useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getTokenFromUrl } from './Authenticate';
 import SharedDataContext from "./SharedDataContext";
+import * as recommendations from "react-bootstrap/ElementChildren";
 const Spotify = require('spotify-web-api-js');
 
 function SearchSpotify() {
-  const { searchTerm } = useContext(SharedDataContext);
-  const [recommendations, setRecommendations] = useState([]);
+    const { searchTerm, setRecommendationsData } = useContext(SharedDataContext);
     const spotify = new Spotify();
+    const navigate = useNavigate();
 
     let mood = searchTerm;
+    console.log("SearchSpotify: mood = ", mood);
     useEffect(() => {
     const moodAttributes = {
       Happy: { valence: 0.8, energy: 0.8 },
@@ -22,12 +25,17 @@ function SearchSpotify() {
       try {
         if (mood in moodAttributes) {
             const response = await spotify.getRecommendations({
+                seed_genres: [mood.toLowerCase()],
                 target_valence: moodAttributes[mood].valence,
                 target_energy: moodAttributes[mood].energy,
+                limit: 10
             });
-            console.log('Recommendations for mood', response);
-        }
-      } catch (err) {
+            if (response && response.tracks) {
+                setRecommendationsData(response.tracks);
+                navigate('/results');
+            }
+      }
+      }catch (err) {
           console.error('Error getting recommendations:', err);
       }
     };
@@ -45,7 +53,7 @@ function SearchSpotify() {
 
         return (
             <div>
-              <h2>Spotify Recommendations for Mood: "{mood}"</h2>
+              <h1>Spotify Recommendations for Mood: "{mood}"</h1>
               <ul>
                 {recommendations.map((track, index) => (
                     <li key={index}>{track.name} by {track.artists.map(artist => artist.name).join(', ')}</li>

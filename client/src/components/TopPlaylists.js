@@ -1,14 +1,18 @@
-
+import React from "react";
+import "../css/App.css";
+import Results from "./Results";
 
 function TopPlaylists() {
   return (
+      <>
     <div className="topPlaylists">
-		  <h1>Top Playlists</h1>
+		  <h2>Top Playlists</h2>
       <br />
-      <p>test</p>
-      
+      <Results/>
+
 	  <br/>	
     </div>
+    </>
   );
 }
 

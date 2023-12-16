@@ -4,8 +4,20 @@
 const express = require('express');
 const cors = require('cors');
 const {join} = require("path");
+const helmet = require('helmet');
 
 const app = express();
+
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://api.spotify.com", "https://accounts.spotify.com"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        imgSrc: ["'self'", "data:", "https://i.scdn.co"], // i.scdn.co is for Spotify album art images
+        frameSrc: ["'self'", "https://accounts.spotify.com", "https://api.spotify.com"],
+        connectSrc: ["'self'", "https://api.spotify.com"], // Needed for making API requests to Spotify
+    }
+}));
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -46,8 +58,10 @@ app.post('/analyze-mood', async (req, res) => {
 
 // Serve React app for any other route
 app.get('*', (req, res) => {
+    res.cookie('cookieName', 'cookieValue', { sameSite: 'none', secure: true });
     res.sendFile(join(__dirname, '../client/build', 'index.html'));
 });
+
 
 
 const PORT = 3001; // Directly setting the port number

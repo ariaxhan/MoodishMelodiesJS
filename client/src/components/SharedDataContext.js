@@ -4,9 +4,10 @@ const SharedDataContext = createContext();
 
 export const SharedDataProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [recommendationsData, setRecommendationsData] = useState([]);
 
   return (
-    <SharedDataContext.Provider value={{ searchTerm, setSearchTerm }}>
+    <SharedDataContext.Provider value={{ searchTerm, setSearchTerm, recommendationsData, setRecommendationsData }}>
       {children}
     </SharedDataContext.Provider>
   );

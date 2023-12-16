@@ -1,11 +1,13 @@
 
 import React from 'react';
 import Login from './Login';
+import '../css/App.css';
 function LoginPage() {
     const redirectLogin = () => {
         window.location.href = 'http://localhost:3001/analyze-mood';
     };
   return (
+      <>
     <div>
         <header>
             <h1>Ready to see what song fits your mood?</h1>
@@ -17,6 +19,7 @@ function LoginPage() {
 
         <br />
     </div>
+    </>
   );
 }
 

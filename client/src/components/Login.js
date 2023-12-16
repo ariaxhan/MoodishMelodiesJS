@@ -2,6 +2,7 @@
 import { loginUrl } from "./Authenticate";
 
 function Login({ onLogin }) {
+    console.log("Login.js: loginUrl", loginUrl)
   return (
       <div className="login" onClick={onLogin} style={{ cursor: 'pointer' }}>
       <br /> 

@@ -4,6 +4,7 @@ import SearchBar from './SearchBar';
 import Processing from './Processing';
 import '../css/App.css';
 import React from "react";
+import Results from "./Results";
 function HomePage() {
   return (
       <>
@@ -28,8 +29,14 @@ function HomePage() {
               <Processing/>
               <p className="prompt">How are you feeling today?</p>
           </div>
-
+          <br/>
           <SearchBar/>
+            <br/>
+            <br/>
+          <div className="results">
+                <Results/>
+            </div>
+
 
           <div className="footer">
               <footer>
