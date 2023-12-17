@@ -1,11 +1,12 @@
 
-import React from 'react';
+import React, { useContext } from 'react';
 import Login from './Login';
 import '../css/App.css';
 function LoginPage() {
     const redirectLogin = () => {
         window.location.href = 'http://localhost:3001/analyze-mood';
     };
+
   return (
       <>
     <div>

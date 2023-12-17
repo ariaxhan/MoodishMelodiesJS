@@ -1,51 +1,69 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { getTokenFromUrl } from '../utils/SpotifyUtils';
 import { useNavigate } from 'react-router-dom';
-import SharedDataContext from "./SharedDataContext";
-import SearchSpotify from "./SearchSpotify";
+import { SharedDataContext } from "./SharedDataContext";
 const Spotify = require('spotify-web-api-js');
 
-// Spotify Authentication Constants and Functions
-const authEndpoint = 'https://accounts.spotify.com/authorize';
-const redirectUri = 'http://localhost:3001/'; // Ensure this matches the URI in Spotify Dashboard
-const clientId = '01c9f82ca3e348e2adc1d98eded52db1';
-
-const scopes = [
-    'playlist-modify-public',
-    'playlist-modify-private',
-];
-
-// Function to extract token from URL
-export const getTokenFromUrl = () => {
-    console.log("get token from url" + window.location.hash)
-    const hash = window.location.hash.substring(1);
-    const params = new URLSearchParams(hash);
-    return params.get('access_token');
-};
-
-// Spotify login URL with required scopes
-export const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-    '%20'
-)}&response_type=token&show_dialog=true`;
-
 function Authenticate() {
+    console.log("Authenticate");
+
     const spotify = new Spotify();
-    const { setSpotifyToken } = useContext(SharedDataContext);
     const navigate = useNavigate();
-    useEffect(() => {
+    const { recommendationsData, setRecommendationsData } = useContext(SharedDataContext);
+
+    const mood = localStorage.getItem('mood');
+
+    console.log("mood: " + mood);
+
+    const moodAttributes = {
+        Happy: {valence: 0.8, energy: 0.8},
+        Sad: {valence: 0.2, energy: 0.1},
+        Energetic: {valence: 0.9, energy: 0.9},
+        Relaxed: {valence: 0.2, energy: 0.2},
+        Angry: {valence: 0.2, energy: 0.8},
+        Romantic: {valence: 0.8, energy: 0.3},
+    };
+
+    useEffect(async () => {
         const token = getTokenFromUrl();
         if (token) {
-            setSpotifyToken(token);
             spotify.setAccessToken(token);
+            console.log("token: " + token);
+            console.log("SearchSpotify: mood = ", mood);
 
-            SearchSpotify();
-            console.log("SearchSpotify: executed");
+                const response = await spotify.getRecommendations({
+                    seed_genres: [mood.toLowerCase()],
+                    target_valence: moodAttributes[mood].valence,
+                    target_energy: moodAttributes[mood].energy,
+                    limit: 10
+                });
 
+                let data = response.tracks.map((track, index) => (
+                    track.name + " by " + track.artists.map(artist => artist.name).join(', ')
+                ));
+
+                console.log("data: ", data);
+                console.log(typeof data);
+
+                setRecommendationsData(data);
             // Redirect to the results page
-            navigate('/results');
         }
-    }, [navigate, setSpotifyToken]);
+    }, [navigate, mood, setRecommendationsData]);
 
-    return <div>Authenticating...</div>;
+
+    return (
+        <>
+            <div>
+                <h3>Spotify Recommendations</h3>
+                <p>Here are your Spotify recommendations!</p>
+                <ul>
+                    {Array.isArray(recommendationsData) && recommendationsData.map((datum, index) => (
+                        <li key={index}>{datum}</li>
+                    ))}
+                </ul>
+            </div>
+        </>
+    );
 }
 
 

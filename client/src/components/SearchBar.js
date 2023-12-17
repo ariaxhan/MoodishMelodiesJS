@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
-import SharedDataContext from './SharedDataContext';
+import { SharedDataContext } from './SharedDataContext';
 import '../css/SearchBar.css';
 import { useNavigate } from 'react-router-dom';
+
 function SearchBar() {
-    const { setSearchTerm } = useContext(SharedDataContext);
+    const { searchTerm, setSearchTerm } = useContext(SharedDataContext);
     const [isLoading, setIsLoading] = useState(false); // State to track the loading status
     const navigate = useNavigate();
     const moods = ['Happy', 'Sad', 'Energetic', 'Relaxed', 'Angry', 'Romantic'];
@@ -25,7 +26,8 @@ function SearchBar() {
 
             const data = await response.json(); // Correctly handling the JSON response
             console.log('Server response:', data);
-            setSearchTerm(mood); // Update the shared search term with the selected mood
+            localStorage.setItem("mood", mood); // Update the shared search term with the selected mood
+
             // send search term as response
             return data;
         } catch (error) {

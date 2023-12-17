@@ -1,16 +1,26 @@
 import React, { createContext, useState } from 'react';
 
-const SharedDataContext = createContext();
+export const SharedDataContext = createContext({
+    searchTerm: "",
+    setSearchTerm: () => {},
+    recommendationsData: [],
+    setRecommendationsData: () => {},
+});
 
-export const SharedDataProvider = ({ children }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [recommendationsData, setRecommendationsData] = useState([]);
+const SharedDataProvider = ({ children }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [recommendationsData, setRecommendationsData] = useState("");
 
   return (
-    <SharedDataContext.Provider value={{ searchTerm, setSearchTerm, recommendationsData, setRecommendationsData }}>
+    <SharedDataContext.Provider value={{
+        searchTerm: searchTerm,
+        setSearchTerm: setSearchTerm,
+        recommendationsData: recommendationsData,
+        setRecommendationsData: setRecommendationsData,
+    }}>
       {children}
     </SharedDataContext.Provider>
   );
 };
 
-export default SharedDataContext;
+export default SharedDataProvider;

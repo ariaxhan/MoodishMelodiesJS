@@ -4,47 +4,34 @@ import SearchBar from './SearchBar';
 import Processing from './Processing';
 import '../css/App.css';
 import React from "react";
-import Results from "./Results";
 function HomePage() {
-  return (
-      <>
-          <nav className="navbar">
-              <ul className="nav-links">
-                  <li><Link to="/">Home</Link></li>
-                  <li><Link to="/top_playlists">Top Playlists</Link></li>
-                  <li><Link to="/login-page">Login</Link></li>
-              </ul>
-          </nav>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <div className="title">
-              <h1>BookishMelodies</h1>
-          </div>
-          <div className="subscript">
-              <p>Mood-Inspired Playlist Generator</p>
-              <Processing/>
-              <p className="prompt">How are you feeling today?</p>
-          </div>
-          <br/>
-          <SearchBar/>
+    return (
+        <>
+            <nav className="navbar">
+                <ul className="nav-links">
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/top_playlists">Top Playlists</Link></li>
+                    <li><Link to="/login-page">Login</Link></li>
+                </ul>
+            </nav>
             <br/>
-            <br/>
-          <div className="results">
-                <Results/>
+            <div className="title">
+                <h1>BookishMelodies</h1>
+            </div>
+            <div className="subscript">
+                <SearchBar/>
+                <p>Mood-Inspired Playlist Generator</p>
+                <Processing/>
+                <p className="prompt">How are you feeling today?</p>
             </div>
 
-
-          <div className="footer">
-              <footer>
-                  <p>&copy; 2023 BookishMelodies</p>
-              </footer>
-          </div>
-      </>
-  );
+            <div className="footer">
+                <footer>
+                    <p>&copy; 2023 BookishMelodies</p>
+                </footer>
+            </div>
+        </>
+    );
 }
 
 export default HomePage;
