@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import '../css/SearchBar.css';
+import '../styles/SearchBar.css';
 import SearchBar from './SearchBar';
 import Processing from './Processing';
-import '../css/App.css';
+import '../styles/App.css';
 import React from "react";
 function HomePage() {
     return (
@@ -14,6 +14,7 @@ function HomePage() {
                     <li><Link to="/login-page">Login</Link></li>
                 </ul>
             </nav>
+            <br/>
             <br/>
             <div className="title">
                 <h1>BookishMelodies</h1>

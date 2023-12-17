@@ -1,16 +1,12 @@
-import React, { useContext, useState } from 'react';
-import { SharedDataContext } from './SharedDataContext';
-import '../css/SearchBar.css';
+import React from 'react';
+import '../styles/SearchBar.css';
 import { useNavigate } from 'react-router-dom';
 
 function SearchBar() {
-    const { searchTerm, setSearchTerm } = useContext(SharedDataContext);
-    const [isLoading, setIsLoading] = useState(false); // State to track the loading status
     const navigate = useNavigate();
     const moods = ['Happy', 'Sad', 'Energetic', 'Relaxed', 'Angry', 'Romantic'];
 
     const sendMoodToServer = async (mood) => {
-        setIsLoading(true); // Start loading
         try {
             const response = await fetch('http://localhost:3001/analyze-mood', {
                 method: 'POST',
@@ -32,8 +28,6 @@ function SearchBar() {
             return data;
         } catch (error) {
             console.error('Error sending mood to server:', error);
-        } finally {
-            setIsLoading(false); // End loading
         }
     };
 

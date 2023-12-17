@@ -3,8 +3,6 @@ import {useContext} from "react";
 import {SharedDataContext} from "./SharedDataContext";
 
 function Login({ onLogin }) {
-    const { searchTerm } = useContext(SharedDataContext);
-
     // Spotify Authentication Constants and Functions
     const authEndpoint = 'https://accounts.spotify.com/authorize';
     const redirectUri = 'http://localhost:3001/'; // Ensure this matches the URI in Spotify Dashboard
@@ -18,8 +16,6 @@ function Login({ onLogin }) {
     const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
         '%20'
     )}&response_type=token&show_dialog=true`;
-
-
     console.log("Login.js: loginUrl", loginUrl);
   return (
       <div className="login" onClick={onLogin} style={{ cursor: 'pointer' }}>
