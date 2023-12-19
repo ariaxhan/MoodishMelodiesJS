@@ -2,7 +2,7 @@
 
 ## Overview
 
-BookishMelodiesJS is a web application that combines the world of books with moods, offering a unique experience of generating Spotify playlists based on moods. The application uses React for the frontend, Express for the backend, and integrates with the Open Library and Spotify APIs.
+BookishMelodiesJS is a web application that combines the world of music with moods, offering a unique experience of generating Spotify playlists based on moods. The application uses React for the frontend, Express for the backend, and integrate the Spotify Web API.
 
 ## Functionality
 
@@ -22,7 +22,7 @@ BookishMelodiesJS is a web application that combines the world of books with moo
    - The application will suggest a playlist from Spotify that relates to the selected mood.
 
 4. **Explore the Playlist:**
-   - Browse through the suggested playlist and enjoy music that complements your reading experience.
+   - Browse through the suggested playlist and enjoy music that complements your mood.
 
 ## Technology Stack
 
@@ -40,6 +40,7 @@ BookishMelodiesJS is a web application that combines the world of books with moo
 
 ### Animation
 - Colorful moving bar for aesthetic purposes.
+- Typewriter effect for aesthetic purposes.
 
 ### API
 - **Spotify API:**

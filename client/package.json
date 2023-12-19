@@ -19,6 +19,7 @@
     "react-scripts": "5.0.1",
     "spotify-web-api-js": "^1.5.2",
     "styled-components": "^6.1.1",
+    "typewriter-effect": "^2.21.0",
     "universal-cookie": "^6.1.1",
     "web-vitals": "^2.1.4"
   },

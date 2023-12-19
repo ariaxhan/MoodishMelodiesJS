@@ -1,0 +1,28 @@
+.mood-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.mood-button {
+    font-family: monospace;
+  margin: 20px;
+  background-size: 100px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+    width: 9rem;
+  height: 4rem;
+  border-style: outset;
+  border-color: pink;
+border-width: 1rem;
+  background-color: lightpink;
+}
+
+.mood-button:hover {
+  background-color: lightpink;
+   color: white;
+}
+
+
+

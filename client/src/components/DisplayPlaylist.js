@@ -7,7 +7,7 @@ function DisplayPlaylist({ playlist }) {
 
     return (
         <div className="playlist-display">
-            <h2>{playlist.name}</h2>
+            <h3>{playlist.name}</h3>
             <p>{playlist.description}</p>
             <ul>
                 {playlist.tracks.items.map((item, index) => (

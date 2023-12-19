@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 
+// uses SharedDataContext to create variables that can be set and used across components
 export const SharedDataContext = createContext({
     searchTerm: "",
     setSearchTerm: () => {},

@@ -1,0 +1,32 @@
+
+nav ul {
+    list-style: none;
+    display: flex;
+    color: white;
+}
+
+nav li {
+    margin-right: 20px;
+    color: white;
+    font-family: monospace;
+}
+
+nav a {
+    padding: 10px;
+    margin: 2rem;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+nav {
+    padding: 2rem;
+}
+
+li {
+    font-family: monospace;
+    color: white;
+    font-size: 14px;
+}

@@ -1,0 +1,123 @@
+.logo img {
+    max-width: 100px;
+}
+
+body {
+    position: relative;
+}
+
+main {
+    padding: 2rem;
+
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-family: monospace;
+    align-self: center;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    color: white;
+
+}
+
+h2 {
+    font-size: 18px;
+    font-family: monospace;
+    display: flex;
+    color: white;
+    justify-content: center;
+    font-style: italic;
+}
+
+h3 {
+    font-size: 20px;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+p {
+    font-size: 16px;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+
+.question {
+    font-size: 18px;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.title {
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+    font-size: 40px;
+    font-family: monospace;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    justify-content: center;
+    font-family: monospace;
+    color: white;
+}
+
+.header {
+    font-size: 25px;
+    width: 100%;
+    height: 20%;
+    top: 0;
+    right: 0;
+    left: 0;
+    justify-content: center;
+    color: white;
+}
+
+.question {
+    font-size: 19px;
+    color: white;
+    font-family: monospace;
+    justify-content: left;
+    padding: 1rem;
+    font-style: italic;
+}
+
+.answer {
+    font-size: 17px;
+    color: white;
+    font-family: monospace;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 1.5rem;
+
+}
+
+.FAQ {
+    padding: 0rem 4rem 4rem;
+}
+
+.footer {
+    font-size: 15px;
+    color: white;
+    font-family: monospace;
+}
+
+
+BODY { background: black }
+

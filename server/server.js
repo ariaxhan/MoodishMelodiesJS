@@ -1,5 +1,3 @@
-
-
 // Server-side Express app
 const express = require('express');
 const cors = require('cors');
@@ -8,6 +6,7 @@ const helmet = require('helmet');
 
 const app = express();
 
+// Middleware to protect against common web vulnerabilities/allow rendering of resources
 app.use(helmet.contentSecurityPolicy({
     directives: {
         defaultSrc: ["'self'"],
@@ -30,39 +29,14 @@ app.use((req, res, next) => {
     next();
 });
 
-
 // Serve static files from the React app
 app.use(express.static(join(__dirname, '../client/build')));
-
-// Endpoint to set Spotify token
-app.post('/set-spotify-token', (req, res) => {
-    let globalSpotifyToken = req.body.spotifyToken;
-    res.send({ message: 'Spotify token received and stored.' });
-});
-
-// Endpoint for analyzing a mood
-app.post('/analyze-mood', async (req, res) => {
-    const { mood } = req.body;
-    console.log('Received mood:', mood);
-    if (!mood) {
-        res.status(400).send('No mood data provided');
-        return;
-    }
-
-    // Here, you can add any logic to process the mood data
-
-    // Example response
-    res.json({ message: `Mood ${mood} received and processed.` });
-});
-
 
 // Serve React app for any other route
 app.get('*', (req, res) => {
     res.cookie('cookieName', 'cookieValue', { sameSite: 'none', secure: true });
     res.sendFile(join(__dirname, '../client/build', 'index.html'));
 });
-
-
 
 const PORT = 3001; // Directly setting the port number
 app.listen(PORT, () => {

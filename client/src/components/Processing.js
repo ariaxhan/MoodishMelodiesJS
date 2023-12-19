@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
-function Processing() {
-    const [position, setPosition] = useState(-100);
+// function using Animation to create a colorful moving bar
 
+function Processing() {
+    // set position using state
+    const [position, setPosition] = useState(-100);
+    // set up effect
     useEffect(() => {
         let animationFrameId;
-
+        // define animation
         const animate = () => {
             setPosition(prevPosition => (prevPosition < 100 ? prevPosition + 1 : -100));
             animationFrameId = requestAnimationFrame(animate);
         };
-
+        // store id and use it appropriately
         animationFrameId = requestAnimationFrame(animate);
-
         return () => cancelAnimationFrame(animationFrameId);
     }, []);
+    // css styles for the bar
     const loadingBarStyle = {
         width: '60%',
         height: '20px',
@@ -29,7 +32,7 @@ function Processing() {
         left: `${position}%`,
         width: '100%',
         height: '100%',
-        background: 'linear-gradient(to right, blue, indigo, violet)',
+        background: 'linear-gradient(to right, lightpink, pink, hotpink)',
     };
 
     return (

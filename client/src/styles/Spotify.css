@@ -1,0 +1,23 @@
+.login {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.login > a {
+  padding: 28px 30px;
+  border-radius: 99px;
+  font-weight: 600;
+  font-size: 18px;
+  font-family: monospace;
+  color: black;
+  background-color: pink;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.login > a:hover {
+  background-color: hotpink;
+}
+

@@ -1,0 +1,12 @@
+how to execute:
+
+1. cd to client directory
+2. run "npm run build"
+3. cd to server directory
+4. run "node server.js"
+5. open browser and go to "localhost:3001"
+
+note: I was not able to put everything in the public folder,
+so it is in the src folder.
+The React app would not build if I put it in the public folder.
+The port number is 3001.
