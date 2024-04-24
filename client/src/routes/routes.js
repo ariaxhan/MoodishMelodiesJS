@@ -14,7 +14,7 @@ const RouteComponent = () => {
             <Route path="/faq" element={<FAQ />} />
             <Route path='*' element={<NotFoundPage />} />
             <Route path='/login-page' element={<LoginPage />} />
-            <Route path-'/authenticate' element={<Authenticate />} />
+            <Route path='/authenticate' element={<Authenticate />} />
         </Routes>
     );
 };
