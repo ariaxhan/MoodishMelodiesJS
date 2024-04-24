@@ -1,16 +1,24 @@
+// DisplayPlaylist.js
 import React from 'react';
+import useSpotifyRecommendations from "./UseSpotifyRecommendations";
 
-function DisplayPlaylist({ playlist }) {
-    if (!playlist) {
+function DisplayPlaylist() {
+    const { recommendations, error } = useSpotifyRecommendations();
+
+    if (error) {
+        return <p>Error: {error}</p>;
+    }
+
+    if (!recommendations) {
         return <p>Loading playlist...</p>;
     }
 
     return (
         <div className="playlist-display">
-            <h3>{playlist.name}</h3>
-            <p>{playlist.description}</p>
+            <h3>{recommendations.name}</h3>
+            <p>{recommendations.description}</p>
             <ul>
-                {playlist.tracks.items.map((item, index) => (
+                {recommendations.tracks.items.map((item, index) => (
                     <li key={index}>
                         {item.track.name} by {item.track.artists.map(artist => artist.name).join(", ")}
                     </li>
