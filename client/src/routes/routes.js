@@ -10,7 +10,7 @@ const RouteComponent = () => {
     return (
         <Routes>
             <Route path='/home' element={<HomePage />} />
-            <Route path='/' element={<Authenticate />} />
+            <Route path='/' element={<HomePage />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path='*' element={<NotFoundPage />} />
             <Route path='/login-page' element={<LoginPage />} />
