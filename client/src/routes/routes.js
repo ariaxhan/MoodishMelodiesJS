@@ -4,7 +4,7 @@ import HomePage from '../components/HomePage';
 import FAQ from '../components/FAQ';
 import NotFoundPage from '../components/NotFoundPage';
 import LoginPage from '../components/LoginPage';
-// import Authenticate from "../components/Authenticate";
+ import Authenticate from "../components/Authenticate";
 
 const RouteComponent = () => {
     return (
@@ -14,6 +14,7 @@ const RouteComponent = () => {
             <Route path="/faq" element={<FAQ />} />
             <Route path='*' element={<NotFoundPage />} />
             <Route path='/login-page' element={<LoginPage />} />
+            <Route path-'/authenticate' element={<Authenticate />}/>
         </Routes>
     );
 };
