@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import useSpotifyRecommendations from '../hooks/useSpotifyRecommendations'; // Adjust the path as needed
+import useSpotifyRecommendations from './UseSpotifyRecommendations'; // Adjust the path as needed
 import { useNavigate } from 'react-router-dom';
 import '../styles/NavBar.css';
 import { SharedDataContext } from "./SharedDataContext";
