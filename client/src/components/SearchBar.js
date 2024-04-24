@@ -13,7 +13,7 @@ function SearchBar() {
     const sendMoodToServer = async (mood) => {
         // send mood as a json
         try {
-            const response = await fetch('http://localhost:3001/analyze-mood', {
+            const response = await fetch('https://moodishmelodies.pages.dev/analyze-mood', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
