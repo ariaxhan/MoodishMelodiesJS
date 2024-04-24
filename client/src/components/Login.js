@@ -3,7 +3,7 @@
 function Login({ onLogin }) {
     // Spotify Authentication Constants and Functions
     const authEndpoint = 'https://accounts.spotify.com/authorize';
-    const redirectUri = 'http://localhost:3001/';
+    const redirectUri = 'https://moodishmelodies.pages.dev/analyze-mood/';
     const clientId = '01c9f82ca3e348e2adc1d98eded52db1';
     // define what information is being requested of the user
     const scopes = [
