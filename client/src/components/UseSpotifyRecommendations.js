@@ -12,7 +12,7 @@
 //             return initial;
 //         }, {});
 //     window.location.hash = ''; // Clear the hash to protect against access token leakage
-//     return hash;
+//     return hash.access_token;
 // };
 //
 // // Custom hook to fetch Spotify recommendations based on mood
@@ -22,16 +22,15 @@
 //
 //     useEffect(() => {
 //         let isSubscribed = true; // Flag to prevent state update if the component is unmounted
+//         const token = getTokenFromUrl(); // Extract token at the start of the component lifecycle
+//
+//         if (!token) {
+//             setError('No Spotify token available');
+//             return; // Exit early if there is no token
+//         }
 //
 //         const spotifyApi = new Spotify();
-//         const tokenObject = getTokenFromUrl();
-//         if (tokenObject && tokenObject.hash) {
-//             spotifyApi.setAccessToken(tokenObject.hash);
-//         } else {
-//             if (isSubscribed) {
-//                 setError('No token available');
-//             }
-//         }
+//         spotifyApi.setAccessToken(token);
 //
 //         const moodAttributes = {
 //             Happy: { valence: 1.0, energy: 1.0 },
@@ -42,49 +41,41 @@
 //             Romantic: { valence: 0.8, energy: 0.3 },
 //         };
 //
-//         // const fetchRecommendations = async () => {
-//         //     if (!moodAttributes[mood]) {
-//         //         if (isSubscribed) {
-//         //             setError(`Mood "${mood}" is not recognized.`);
-//         //         }
-//         //         return;
-//         //     }
-//         //
-//         //     try {
-//         //         const response = await spotifyApi.getRecommendations({
-//         //             seed_genres: ['pop', 'rap', 'rock'],
-//         //             target_valence: moodAttributes[mood].valence,
-//         //             target_energy: moodAttributes[mood].energy,
-//         //             limit: 10,
-//         //         });
-//         //
-//         //         if (isSubscribed) {
-//         //             const tracks = response.tracks.map(track => ({
-//         //                 name: track.name,
-//         //                 artists: track.artists.map(artist => artist.name).join(', '),
-//         //             }));
-//         //             setRecommendations(tracks);
-//         //         }
-//         //     } catch (err) {
-//         //         if (isSubscribed) {
-//         //             setError(`Failed to fetch recommendations: ${err.message}`);
-//         //         }
-//         //     }
-//         // };
+//         if (!moodAttributes[mood]) {
+//             setError(`Mood "${mood}" is not recognized.`);
+//             return; // Exit early if the mood is not recognized
+//         }
 //
-//         // if (token && moodAttributes[mood]) {
-//         //     fetchRecommendations().catch(err => {
-//         //         if (isSubscribed) {
-//         //             setError(`Failed to fetch recommendations: ${err.message}`);
-//         //         }
-//         //     });
-//         // }
+//         const fetchRecommendations = async () => {
+//             try {
+//                 const response = await spotifyApi.getRecommendations({
+//                     seed_genres: ['pop', 'rap', 'rock'],
+//                     target_valence: moodAttributes[mood].valence,
+//                     target_energy: moodAttributes[mood].energy,
+//                     limit: 10,
+//                 });
 //
-//         // Cleanup function
+//                 if (isSubscribed) {
+//                     const tracks = response.tracks.map(track => ({
+//                         name: track.name,
+//                         artists: track.artists.map(artist => artist.name).join(', '),
+//                     }));
+//                     setRecommendations(tracks);
+//                 }
+//             } catch (err) {
+//                 if (isSubscribed) {
+//                     setError(`Failed to fetch recommendations: ${err.message}`);
+//                 }
+//             }
+//         };
+//
+//         fetchRecommendations();
+//
+//         // Cleanup function to set isSubscribed to false when the component unmounts
 //         return () => {
 //             isSubscribed = false;
 //         };
-//     }, [mood]); // Depend on mood to re-run the effect when it changes
+//     }, [mood]); // Effect only re-runs when mood changes
 //
 //     return { recommendations, error };
 // };

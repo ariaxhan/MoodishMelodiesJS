@@ -1,27 +1,20 @@
 // DisplayPlaylist.js
-import React from 'react';
-import useSpotifyRecommendations from "./UseSpotifyRecommendations";
+import React, { useContext } from 'react';
+import { SharedDataContext } from "./SharedDataContext";
 
 function DisplayPlaylist() {
-    const { recommendations, error } = useSpotifyRecommendations();
+    const { recommendationsData } = useContext(SharedDataContext);
 
-    if (error) {
-        return <p>Error: {error}</p>;
-    }
-
-    if (!recommendations) {
-        return <p>Loading playlist...</p>;
+    if (!recommendationsData || recommendationsData.length === 0) {
+        return <p>Loading playlist or no recommendations found...</p>;
     }
 
     return (
         <div className="playlist-display">
-            <h3>{recommendations.name}</h3>
-            <p>{recommendations.description}</p>
+            <h3>Your Spotify Playlist</h3>
             <ul>
-                {recommendations.tracks.items.map((item, index) => (
-                    <li key={index}>
-                        {item.track.name} by {item.track.artists.map(artist => artist.name).join(", ")}
-                    </li>
+                {recommendationsData.map((track, index) => (
+                    <li key={index}>{track}</li>
                 ))}
             </ul>
         </div>
